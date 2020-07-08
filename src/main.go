@@ -4,10 +4,17 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"net/http"
 )
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
 
 func main() {
 
+	http.HandleFunc("/", Index)
+	http.ListenAndServe(":7070", nil)
 	db := con()
 
 	results, err := db.Query("SELECT goal FROM goals")
