@@ -3,12 +3,16 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"net/http"
+	"text/template"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
+var tmpl = template.Must(template.ParseGlob("public/*"))
+
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello\n")
+	tmpl.ExecuteTemplate(w, "Index", nil)
 }
 
 func main() {
