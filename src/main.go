@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:8080)/simple_goals")
+	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3333)/simple_goals")
 
 	if err != nil {
 		panic(err.Error())
