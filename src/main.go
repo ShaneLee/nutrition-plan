@@ -7,11 +7,8 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3333)/simple_goals")
 
-	if err != nil {
-		panic(err.Error())
-	}
+	db := con()
 
 	results, err := db.Query("SELECT goal FROM goals")
 
@@ -31,4 +28,14 @@ func main() {
 	}
 
 	defer db.Close()
+}
+
+func con() (db *sql.DB) {
+	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3333)/simple_goals")
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	return db
 }
