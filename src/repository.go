@@ -1,0 +1,42 @@
+package main
+
+import (
+	"database/sql"
+	"fmt"
+
+	_ "github.com/go-sql-driver/mysql"
+)
+
+func findAllGoals() {
+
+	db := con()
+
+	results, err := db.Query("SELECT goal FROM goals")
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	for results.Next() {
+		var goal string
+
+		err = results.Scan(&goal)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		fmt.Println(goal)
+	}
+
+	defer db.Close()
+}
+
+func con() (db *sql.DB) {
+	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3333)/simple_goals")
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	return db
+}
