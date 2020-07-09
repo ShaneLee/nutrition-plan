@@ -7,6 +7,4 @@ import (
 func main() {
 	http.HandleFunc("/", Index)
 	http.ListenAndServe(":7070", nil)
-
-	findAllGoals()
 }

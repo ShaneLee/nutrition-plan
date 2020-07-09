@@ -8,5 +8,5 @@ import (
 var tmpl = template.Must(template.ParseGlob("public/*"))
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	tmpl.ExecuteTemplate(w, "Index", nil)
+	tmpl.ExecuteTemplate(w, "Index", findAllMeals())
 }
