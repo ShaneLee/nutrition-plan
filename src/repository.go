@@ -7,32 +7,32 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func findAllGoals() {
+func findAllMeals() {
 
 	db := con()
 
-	results, err := db.Query("SELECT goal FROM goals")
+	results, err := db.Query("SELECT name FROM meals")
 
 	if err != nil {
 		panic(err.Error())
 	}
 
 	for results.Next() {
-		var goal string
+		var name string
 
 		err = results.Scan(&goal)
 		if err != nil {
 			panic(err.Error())
 		}
 
-		fmt.Println(goal)
+		fmt.Println(name)
 	}
 
 	defer db.Close()
 }
 
 func con() (db *sql.DB) {
-	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3333)/simple_goals")
+	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3333)/nutrition")
 
 	if err != nil {
 		panic(err.Error())
